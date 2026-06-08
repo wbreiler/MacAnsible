@@ -1,0 +1,59 @@
+---
+# Mac App Store apps
+# Requires: mas CLI (installed via Homebrew) and user signed into App Store
+#
+# NOTE: Logic Pro, Final Cut Pro, MainStage, Motion, Compressor are large paid apps.
+#       They will only install if you have previously purchased them.
+#
+# NOTE: "Creator Studio" variants seen in /Applications are just the App Store
+#       originals — the real MAS IDs are used here.
+
+- name: Check if mas CLI is available
+  command: which mas
+  register: mas_check
+  changed_when: false
+  failed_when: false
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+
+- name: Install MAS apps
+  community.general.mas:
+    id: "{{ item.id }}"
+    state: present
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  when: mas_check.rc == 0
+  loop:
+    # Apple Office Suite
+    - { id: 361285480,  name: "Keynote (latest)" }
+    - { id: 361304891,  name: "Numbers (latest)" }
+    - { id: 361309726,  name: "Pages (latest)" }
+
+    # Apple Pro Apps (large downloads, previously purchased)
+    - { id: 1615087040, name: "Logic Pro" }
+    - { id: 1631624924, name: "Final Cut Pro" }
+    - { id: 6746637089, name: "MainStage" }
+    - { id: 6746637149, name: "Motion" }
+    - { id: 6746516157, name: "Compressor" }
+
+    # Apple Creative
+    - { id: 6746662575, name: "Pixelmator Pro" }
+    - { id: 1444636541, name: "Photomator" }
+
+    # Apple Developer & Utilities
+    - { id: 640199958,  name: "Developer" }
+    - { id: 899247664,  name: "TestFlight" }
+    - { id: 1037126344, name: "Apple Configurator" }
+    - { id: 1450874784, name: "Transporter" }
+
+    # Utilities
+    - { id: 425264550,  name: "Blackmagic Disk Speed Test" }
+    - { id: 1168254295, name: "AmorphousDiskMark" }
+    - { id: 1363637349, name: "Unread" }
+    - { id: 1451685025, name: "WireGuard" }
+    - { id: 1569813296, name: "1Password for Safari" }
+    - { id: 1573461917, name: "SponsorBlock for Safari" }
+    - { id: 1662217862, name: "Wipr" }
+    - { id: 6443975850, name: "SenPlayer" }
+    - { id: 6477373179, name: "CANStudio" }
+    - { id: 1136220934, name: "Infuse" }

@@ -1,0 +1,345 @@
+---
+- name: Check if Homebrew is installed
+  stat:
+    path: /opt/homebrew/bin/brew
+  register: brew_stat
+
+- name: Install Homebrew
+  shell: >
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  environment:
+    NONINTERACTIVE: "1"
+  when: not brew_stat.stat.exists
+
+- name: Update Homebrew
+  community.general.homebrew:
+    update_homebrew: true
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+
+# --- Taps ---
+- name: Add Homebrew taps
+  community.general.homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  loop:
+    - artginzburg/tap
+    - charmbracelet/tap
+    - domt4/autoupdate
+    - gcenx/wine
+    - izyumidev/xcode-discord-rpc
+    - krishkrosh/apps
+    - lihaoyun6/tap
+    - majd/repo
+    - metafates/mangal
+    - minacle/chntpw
+    - minio/stable
+    - nextfire/tap
+    - noghartt/container-compose
+    - olets/tap
+    - oven-sh/bun
+    - scouzi1966/afm
+    - sikarugir-app/sikarugir
+    - teamookla/speedtest
+    - tw93/tap
+    - ungive/music-presence
+    - vladkens/tap
+    - xcodesorg/made
+
+# --- Formulae ---
+- name: Install Homebrew formulae
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  loop:
+    # System & shell utilities
+    - coreutils
+    - curl
+    - wget
+    - rsync
+    - tree
+    - watch
+    - bat
+    - fzf
+    - jq
+    - pv
+    - unar
+    - p7zip
+    - unxip
+    - socat
+    - mkcert
+    - xdelta
+    - wimlib
+    - usbutils
+    - dtc
+    - squashfs
+
+    # System monitoring
+    - btop
+    - bmon
+    - ifstat
+    - ncdu
+    - macmon
+    - asitop
+    - nvtop
+    - iperf3
+    - ipmitool
+    - smartmontools
+    - net-snmp
+    - nmap
+    - wireshark
+
+    # Terminal fun/info
+    - fastfetch
+    - screenfetch
+    - hyfetch
+    - cpufetch
+    - fortune
+    - cowsay
+    - c2048
+    - thefuck
+
+    # Development - core
+    - git
+    - git-lfs
+    - gh
+    - cmake
+    - ninja
+    - autoconf
+    - m4
+    - libtool
+    - pkg-config
+    - clang-format
+    - llvm
+
+    # Development - languages & runtimes
+    - python@3.13
+    - python@3.14
+    - pyenv
+    - pipx
+    - uv
+    - node
+    - bun
+    - deno
+    - go
+    - rust
+    - ruby
+    - php
+    - openjdk
+    - lua
+    - emacs
+
+    # Development - containers & cloud
+    - docker
+    - docker-buildx
+    - docker-completion
+    - kubernetes-cli
+    - doctl
+    - awscli
+
+    # Development - build & packaging
+    - snapcraft
+    - snap
+    - mint
+    - fastlane
+    - composer
+
+    # Multimedia
+    - ffmpeg
+    - handbrake
+    - yt-dlp
+    - gallery-dl
+    - imagemagick
+    - mpv
+    - vlc
+    - flac
+    - lame
+    - opus
+    - speex
+    - libvorbis
+    - x264
+    - x265
+    - svt-av1
+    - aom
+    - dav1d
+    - libvmaf
+    - libplacebo
+    - vapoursynth
+    - rubberband
+    - libsamplerate
+    - libsndfile
+    - mpg123
+
+    # Networking & VPN
+    - tailscale
+    - wireguard-go
+    - mole
+    - wakeonlan
+    - wifi-password
+    - speedtest
+    - domain-check
+    - aria2
+    - socat
+
+    # Security & crypto
+    - gnupg
+    - pinentry-mac
+    - openssl@3
+    - openssl@4
+    - mkcert
+    - argon2
+    - libsodium
+
+    # Terminal tools & editors
+    - neovim
+    - weechat
+    - stormy
+    - terminal-notifier
+    - zsh-syntax-highlighting
+    - fzf
+    - thefuck
+    - tree-sitter
+
+    # Miscellaneous dev tools
+    - mas
+    - xcodes
+    - xcode-discord-rpc
+    - ipatool
+    - chntpw
+    - container-compose
+    - mangal
+    - mailsy
+    - ccusage
+    - gemini-cli
+    - sudo-touchid
+    - afm
+    - merve
+    - ata
+
+    # Disk & filesystem
+    - qemu
+    - libslirp
+    - vde
+    - lxc
+
+    # Fonts (via formulae path, casks handled separately)
+    - libx11
+    - fontconfig
+    - freetype
+
+    # Data processing
+    - sqlite
+    - libpq
+    - libmaxminddb
+
+  ignore_errors: true  # some tapped formulae may be unavailable
+
+# --- Casks ---
+- name: Install Homebrew casks
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+    greedy: false
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+  loop:
+    # Browsers
+    - firefox
+    - google-chrome
+    - google-chrome@canary
+    - orion
+
+    # Communication
+    - discord
+    - slack
+    - signal
+    - whatsapp
+    - zoom
+
+    # Dev tools
+    - visual-studio-code
+    - iterm2
+    - orbstack
+    - zed
+    - cyberduck
+    - db-browser-for-sqlite
+    - klogg
+    - wireshark-app
+
+    # Terminals & system
+    - utm
+    - parsec
+    - rustdesk
+    - windows-app
+    - teamviewer
+
+    # Media
+    - vlc
+    - iina
+    - obs
+    - handbrake-app
+    - spotify
+    - musicbrainz-picard
+
+    # Productivity
+    - obsidian
+    - markedit
+    - imageoptim
+    - mullvad-vpn
+    - protonvpn
+    - tailscale-app
+
+    # Gaming
+    - steam
+    - curseforge
+    - modrinth
+    - cemu
+    - prusaslicer
+    - bambu-studio
+
+    # Utilities
+    - 1password
+    - coconutbattery
+    - istat-menus
+    - istatistica-core
+    - mx-power-gadget
+    - logi-options+
+    - elgato-stream-deck
+    - raspberry-pi-imager
+    - balenaetcher
+    - android-platform-tools
+    - rar
+
+    # Networking
+    - ollama-app
+
+    # Fonts
+    - font-hack-nerd-font
+    - font-monocraft
+
+    # Other
+    - microsoft-excel
+    - microsoft-outlook
+    - microsoft-auto-update
+    - chatgpt
+    - claude
+
+    # Special apps from custom taps
+    - sikarugir
+    - timemachinestatus
+    - trackweight
+    - vrampro
+    - zen
+
+  ignore_errors: true  # some casks may be unavailable or already installed via App Store
+
+- name: Install dockutil (for dock management)
+  community.general.homebrew:
+    name: dockutil
+    state: present
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
