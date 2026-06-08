@@ -1,5 +1,7 @@
 .PHONY: install run run-tags check
 
+export PATH := /opt/homebrew/bin:$(PATH)
+
 install:
 	ansible-galaxy collection install -r requirements.yml
 
