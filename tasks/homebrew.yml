@@ -267,7 +267,6 @@
     - zed
     - cyberduck
     - db-browser-for-sqlite
-    - klogg
     - wireshark-app
 
     # Terminals & system
@@ -283,7 +282,6 @@
     - obs
     - handbrake-app
     - spotify
-    - musicbrainz-picard
 
     # Productivity
     - obsidian
@@ -294,7 +292,6 @@
     - tailscale-app
 
     # Gaming
-    - steam
     - curseforge
     - modrinth
     - cemu
