@@ -343,3 +343,11 @@
     state: present
   environment:
     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+
+- name: Enable sudo-touchid service (Touch ID for sudo)
+  command: /opt/homebrew/bin/brew services start sudo-touchid
+  register: touchid_result
+  changed_when: "'Successfully started' in touchid_result.stdout"
+  failed_when: false
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
