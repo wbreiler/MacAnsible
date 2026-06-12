@@ -176,9 +176,6 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Rust/Cargo
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Zed editor root access
-export ZED_ALLOW_ROOT="true"
-
 # Increase open file limit
 ulimit -n 10240
 

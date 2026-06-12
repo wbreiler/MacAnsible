@@ -10,7 +10,7 @@
   "editor.inlineSuggest.enabled": true,
   "git.autofetch": true,
   "rpc.checkIdle": false,
-  "security.workspace.trust.untrustedFiles": "open",
+  "security.workspace.trust.untrustedFiles": "prompt",
   "C_Cpp.updateChannel": "Insiders",
   "liveshare.presence": true,
   "python.pythonPath": "/opt/homebrew/bin/python3",
@@ -34,7 +34,7 @@
     "10.0.0.196": "linux",
     "storage-nash": "linux"
   },
-  "liveshare.allowInvites": "all",
+  "liveshare.allowInvites": "contacts",
   "terminal.external.windowsExec": "C:\\msys64\\mingw64.exe",
   "editor.accessibilitySupport": "off",
   "explorer.confirmDragAndDrop": false,

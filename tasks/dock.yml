@@ -41,7 +41,7 @@
   command: /opt/homebrew/bin/dockutil --remove all --no-restart
   changed_when: true
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
 
 - name: Add Dock apps in order
   command: >
@@ -55,7 +55,7 @@
     - { path: "/Applications/Claude.app" }
   changed_when: true
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
 
 - name: Add Downloads folder to Dock (fan/list view)
   command: >
@@ -67,7 +67,7 @@
     --no-restart
   changed_when: true
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
 
 - name: Restart Dock to apply changes
   command: killall Dock

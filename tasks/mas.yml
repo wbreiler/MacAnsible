@@ -2,11 +2,9 @@
 # Mac App Store apps
 # Requires: mas CLI (installed via Homebrew) and user signed into App Store
 #
-# NOTE: Logic Pro, Final Cut Pro, MainStage, Motion, Compressor are large paid apps.
-#       They will only install if you have previously purchased them.
-#
-# NOTE: "Creator Studio" variants seen in /Applications are just the App Store
-#       originals — the real MAS IDs are used here.
+# NOTE: The Apple "Creator Studio" collection (Logic Pro, Final Cut Pro,
+#       MainStage, Motion, Compressor, Pixelmator Pro, Photomator) uses the
+#       new free MAS listings below, not the legacy paid IDs.
 
 - name: Check if mas CLI is available
   command: which mas
@@ -14,14 +12,15 @@
   changed_when: false
   failed_when: false
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
 
 - name: Install MAS apps
   community.general.mas:
     id: "{{ item.id }}"
     state: present
+  become: true  # mas 7+ requires root to install apps
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
   when: mas_check.rc == 0
   loop:
     # Apple Office Suite
@@ -29,7 +28,7 @@
     - { id: 361304891,  name: "Numbers (latest)" }
     - { id: 361309726,  name: "Pages (latest)" }
 
-    # Apple Pro Apps (large downloads, previously purchased)
+    # Apple Creator Studio collection (large downloads)
     - { id: 1615087040, name: "Logic Pro" }
     - { id: 1631624924, name: "Final Cut Pro" }
     - { id: 6746637089, name: "MainStage" }
@@ -53,7 +52,7 @@
     - { id: 1451685025, name: "WireGuard" }
     - { id: 1569813296, name: "1Password for Safari" }
     - { id: 1573461917, name: "SponsorBlock for Safari" }
-    - { id: 1662217862, name: "Wipr" }
+    - { id: 1662217862, name: "Wipr 2" }
     - { id: 6443975850, name: "SenPlayer" }
     - { id: 6477373179, name: "CANStudio" }
     - { id: 1136220934, name: "Infuse" }

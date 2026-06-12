@@ -47,7 +47,7 @@
     - tamasfe.even-better-toml
     - tommasov.hosts
   environment:
-    PATH: "/usr/local/bin:/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/usr/local/bin:/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
   register: vscode_ext_result
   changed_when: "'already installed' not in vscode_ext_result.stdout"
   failed_when: false

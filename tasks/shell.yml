@@ -23,6 +23,13 @@
     dest: "{{ home_dir }}/.zprofile"
     backup: true
 
+- name: Install zsh-syntax-highlighting
+  community.general.homebrew:
+    name: zsh-syntax-highlighting
+    state: present
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
+
 - name: Link zsh-syntax-highlighting into OMZ custom plugins
   file:
     src: /opt/homebrew/share/zsh-syntax-highlighting
@@ -36,14 +43,14 @@
   args:
     creates: "{{ home_dir }}/.pyenv/versions/3.14.0"
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
     PYENV_ROOT: "{{ home_dir }}/.pyenv"
   ignore_errors: true
 
 - name: Set pyenv global Python version
   command: /opt/homebrew/bin/pyenv global 3.14.0
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
     PYENV_ROOT: "{{ home_dir }}/.pyenv"
   changed_when: true
   ignore_errors: true
@@ -69,7 +76,7 @@
   loop:
     - wrangler
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
   ignore_errors: true
 
 - name: Set zsh as default shell

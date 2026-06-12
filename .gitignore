@@ -14,4 +14,5 @@ vault_password
 .DS_Store
 
 # Local overrides (machine-specific tweaks that shouldn't be shared)
+*.log
 local.yml

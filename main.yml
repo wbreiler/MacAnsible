@@ -19,8 +19,8 @@
   become: false
 
   vars:
-    home_dir: "{{ ansible_env.HOME }}"
-    username: "{{ ansible_env.USER }}"
+    home_dir: "{{ ansible_facts.env.HOME }}"
+    username: "{{ ansible_facts.env.USER }}"
     homebrew_prefix: /opt/homebrew
 
   tasks:

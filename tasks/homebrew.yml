@@ -15,7 +15,7 @@
   community.general.homebrew:
     update_homebrew: true
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
 
 # --- Taps ---
 - name: Add Homebrew taps
@@ -23,53 +23,27 @@
     name: "{{ item }}"
     state: present
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
   loop:
-    - artginzburg/tap
-    - charmbracelet/tap
-    - domt4/autoupdate
-    - gcenx/wine
+    - artginzburg/tap            # sudo-touchid
     - izyumidev/xcode-discord-rpc
-    - krishkrosh/apps
-    - lihaoyun6/tap
-    - majd/repo
     - metafates/mangal
     - minacle/chntpw
-    - minio/stable
-    - olets/tap
-    - oven-sh/bun
     - scouzi1966/afm
     - teamookla/speedtest
-    - tw93/tap
-    - ungive/music-presence
-    - vladkens/tap
-    - xcodesorg/made
 
 # --- Trust third-party taps (required by Homebrew 4.5+) ---
 - name: Trust Homebrew taps
   command: /opt/homebrew/bin/brew trust "{{ item }}"
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
   loop:
     - artginzburg/tap
-    - charmbracelet/tap
-    - domt4/autoupdate
-    - gcenx/wine
     - izyumidev/xcode-discord-rpc
-    - krishkrosh/apps
-    - lihaoyun6/tap
-    - majd/repo
     - metafates/mangal
     - minacle/chntpw
-    - minio/stable
-    - olets/tap
-    - oven-sh/bun
     - scouzi1966/afm
     - teamookla/speedtest
-    - tw93/tap
-    - ungive/music-presence
-    - vladkens/tap
-    - xcodesorg/made
   register: trust_result
   changed_when: trust_result.rc == 0
   failed_when: false
@@ -80,7 +54,7 @@
     name: "{{ item }}"
     state: present
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
   loop:
     # System & shell utilities
     - coreutils
@@ -226,7 +200,6 @@
     - weechat
     - stormy
     - terminal-notifier
-    - zsh-syntax-highlighting
     - fzf
     - thefuck
     - tree-sitter
@@ -273,7 +246,7 @@
     state: present
     greedy: false
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
   loop:
     # Browsers
     - google-chrome
@@ -335,7 +308,7 @@
     name: dockutil
     state: present
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
 
 - name: Enable sudo-touchid service (Touch ID for sudo)
   command: /opt/homebrew/bin/brew services start sudo-touchid
@@ -343,4 +316,4 @@
   changed_when: "'Successfully started' in touchid_result.stdout"
   failed_when: false
   environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"

@@ -1,7 +1,6 @@
 Host 192.168.1.26
 	HostName 192.168.1.26
 	User root
-	PreferredAuthentications password
 
 Host nas.wbreiler.com
 	HostName nas.wbreiler.com
