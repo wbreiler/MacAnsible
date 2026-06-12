@@ -253,10 +253,12 @@
 
     # Communication
     - discord
+    - signal
     - whatsapp
 
     # Dev tools
     - visual-studio-code
+    - markedit
     - iterm2
     - cyberduck
     - db-browser-for-sqlite
@@ -289,17 +291,16 @@
     - raspberry-pi-imager
     - balenaetcher
     - android-platform-tools
-
-    # Networking
-    - ollama-app
+    - rar
+    - timemachinestatus
 
     # Fonts
     - font-hack-nerd-font
     - font-monocraft
 
     # Other
-    - chatgpt
     - claude
+    - claude-code@latest
 
   ignore_errors: true  # some casks may be unavailable or already installed via App Store
 
