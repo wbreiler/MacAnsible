@@ -45,7 +45,8 @@
   environment:
     PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
     PYENV_ROOT: "{{ home_dir }}/.pyenv"
-  changed_when: true
+  register: pyenv_global
+  changed_when: pyenv_global.rc == 0 and 'already' not in pyenv_global.stdout
   ignore_errors: true
 
 - name: Install global pip packages

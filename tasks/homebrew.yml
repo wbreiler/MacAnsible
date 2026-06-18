@@ -136,8 +136,6 @@
     - awscli
 
     # Development - build & packaging
-    - snapcraft
-    - snap
     - mint
     - fastlane
     - composer
