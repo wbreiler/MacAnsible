@@ -8,15 +8,13 @@ ZSH_THEME="apple"
 zstyle ':omz:update' mode auto
 
 # Plugins
-plugins=(git 1password alias-finder battery wakeonlan thefuck tailscale systemadmin macos gitignore docker docker-compose colored-man-pages catimg zsh-syntax-highlighting web-search)
+plugins=(git 1password alias-finder battery wakeonlan thefuck tailscale systemadmin macos gitignore docker docker-compose colored-man-pages catimg web-search)
 
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
 alias bi="brew install"
 alias bic="brew install --cask"
-alias bubc="brew update && brew upgrade && brew cleanup"
-alias bupc="brew update && brew upgrade && brew cleanup"
 alias bup="brew update && brew upgrade && brew cleanup"
 alias bbd="brew bundle dump"
 alias bs="brew status"
@@ -186,3 +184,6 @@ eval "$(pyenv init -)"
 
 # Antigravity
 export PATH="/Users/wbreiler/.antigravity/antigravity/bin:$PATH"
+
+# zsh-syntax-highlighting (Homebrew; must be sourced last)
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -70,7 +70,6 @@
     - unar
     - p7zip
     - unxip
-    - socat
     - mkcert
     - xdelta
     - wimlib
@@ -95,9 +94,6 @@
 
     # Terminal fun/info
     - fastfetch
-    - screenfetch
-    - hyfetch
-    - cpufetch
     - fortune
     - cowsay
     - c2048
@@ -117,8 +113,6 @@
     - llvm
 
     # Development - languages & runtimes
-    - python@3.13
-    - python@3.14
     - pyenv
     - pipx
     - uv
@@ -155,7 +149,6 @@
     - gallery-dl
     - imagemagick
     - mpv
-    - vlc
     - flac
     - lame
     - opus
@@ -190,8 +183,6 @@
     - gnupg
     - pinentry-mac
     - openssl@3
-    - openssl@4
-    - mkcert
     - argon2
     - libsodium
 
@@ -200,8 +191,6 @@
     - weechat
     - stormy
     - terminal-notifier
-    - fzf
-    - thefuck
     - tree-sitter
 
     # Miscellaneous dev tools
@@ -225,12 +214,6 @@
     - qemu
     - libslirp
     - vde
-    - lxc
-
-    # Fonts (via formulae path, casks handled separately)
-    - libx11
-    - fontconfig
-    - freetype
 
     # Data processing
     - sqlite

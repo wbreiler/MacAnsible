@@ -6,14 +6,6 @@
 #       MainStage, Motion, Compressor, Pixelmator Pro, Photomator) uses the
 #       new free MAS listings below, not the legacy paid IDs.
 
-- name: Check if mas CLI is available
-  command: which mas
-  register: mas_check
-  changed_when: false
-  failed_when: false
-  environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
-
 - name: Install MAS apps
   community.general.mas:
     id: "{{ item.id }}"
@@ -21,7 +13,6 @@
   become: true  # mas 7+ requires root to install apps
   environment:
     PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
-  when: mas_check.rc == 0
   loop:
     # Apple Office Suite
     - { id: 361285480,  name: "Keynote (latest)" }

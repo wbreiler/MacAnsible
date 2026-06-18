@@ -30,13 +30,6 @@
   environment:
     PATH: "/opt/homebrew/bin:{{ ansible_facts.env.PATH }}"
 
-- name: Link zsh-syntax-highlighting into OMZ custom plugins
-  file:
-    src: /opt/homebrew/share/zsh-syntax-highlighting
-    dest: "{{ home_dir }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-    state: link
-    force: true
-
 - name: Install pyenv Python 3.14.0
   command: >
     /opt/homebrew/bin/pyenv install 3.14.0

@@ -47,7 +47,7 @@
   command: >
     /opt/homebrew/bin/dockutil --add "{{ item.path }}" --no-restart
   loop:
-    - { path: "/Applications/Firefox.app" }
+    - { path: "/Applications/Google Chrome.app" }
     - { path: "/System/Applications/Messages.app" }
     - { path: "/Applications/Discord.app" }
     - { path: "/System/Applications/Music.app" }
