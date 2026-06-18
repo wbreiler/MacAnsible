@@ -24,7 +24,7 @@ The playbook runs entirely on `localhost` (`connection: local`, no inventory fil
 | `tasks/xcode_clt.yml` | `xcode` | Uses `softwareupdate` to install CLT non-interactively |
 | `tasks/homebrew.yml` | `homebrew` | Taps → formulae → casks in that order; uses `ignore_errors: true` for custom-tap packages that may move |
 | `tasks/mas.yml` | `mas` | Requires App Store sign-in; large apps (Logic Pro, FCP) only install if previously purchased |
-| `tasks/shell.yml` | `shell` | Installs Oh My Zsh unattended, copies `files/zshrc` and `files/zprofile`, links zsh-syntax-highlighting from Homebrew into OMZ custom plugins |
+| `tasks/shell.yml` | `shell` | Installs Oh My Zsh unattended, copies `files/zshrc` and `files/zprofile`; zsh-syntax-highlighting sourced directly from Homebrew in zshrc |
 | `tasks/git.yml` | `git` | Sets global git config including GPG signing key |
 | `tasks/ssh.yml` | `ssh` | Copies `files/ssh_config`; private keys are NOT managed here |
 | `tasks/vscode.yml` | `vscode` | Copies `files/vscode_settings.json`, installs extensions via `code --install-extension` |
